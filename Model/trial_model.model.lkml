@@ -21,6 +21,11 @@ explore: gdb_logins {
     sql_on:  ${gdb_logins.first_country} = ${looker_countries.code};;
     relationship: many_to_one
   }
+
+  join: dim_gdb_users {
+    relationship: many_to_one
+    sql_on: ${gdb_logins.user_id} =  ${dim_gdb_users.user_id};;
+  }
 }
 #
 # explore: af_3rd_party_games_kpis {}

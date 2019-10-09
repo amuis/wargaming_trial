@@ -138,6 +138,11 @@ view: gdb_logins {
     sql: ${TABLE}.user_id ;;
   }
 
+  dimension: days_since_first_login {
+    type: number
+    sql: date_diff( ${login_date}, ${dim_gdb_users.install_date}, day) ;;
+  }
+
   measure: user_count {
     type: count_distinct
     sql: ${user_id} ;;

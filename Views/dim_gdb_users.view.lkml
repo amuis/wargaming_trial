@@ -490,6 +490,7 @@ view: dim_gdb_users {
   }
 
   dimension: user_id {
+    primary_key: yes
     type: string
     sql: ${TABLE}.user_id ;;
   }
