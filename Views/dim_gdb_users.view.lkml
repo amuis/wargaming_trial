@@ -121,16 +121,19 @@ view: dim_gdb_users {
   }
 
   dimension: gross_rev_0d {
+    hidden: yes
     type: number
     sql: ${TABLE}.gross_rev_0d ;;
   }
 
   dimension: gross_rev_120d {
+    hidden: yes
     type: number
     sql: ${TABLE}.gross_rev_120d ;;
   }
 
   dimension: gross_rev_14d {
+    hidden: yes
     type: number
     sql: ${TABLE}.gross_rev_14d ;;
   }
@@ -141,36 +144,43 @@ view: dim_gdb_users {
   }
 
   dimension: gross_rev_1d {
+    hidden: yes
     type: number
     sql: ${TABLE}.gross_rev_1d ;;
   }
 
   dimension: gross_rev_30d {
+    hidden: yes
     type: number
     sql: ${TABLE}.gross_rev_30d ;;
   }
 
   dimension: gross_rev_360d {
+    hidden: yes
     type: number
     sql: ${TABLE}.gross_rev_360d ;;
   }
 
   dimension: gross_rev_3d {
+    hidden: yes
     type: number
     sql: ${TABLE}.gross_rev_3d ;;
   }
 
   dimension: gross_rev_60d {
+    hidden: yes
     type: number
     sql: ${TABLE}.gross_rev_60d ;;
   }
 
   dimension: gross_rev_7d {
+    hidden: yes
     type: number
     sql: ${TABLE}.gross_rev_7d ;;
   }
 
   dimension: gross_rev_90d {
+    hidden: yes
     type: number
     sql: ${TABLE}.gross_rev_90d ;;
   }
