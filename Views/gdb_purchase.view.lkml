@@ -133,6 +133,12 @@ view: gdb_purchase {
     sql: ${TABLE}.realm ;;
   }
 
+  measure: total_spend {
+    type: sum
+    sql: ${gross_revenue} ;;
+    value_format_name: decimal_2
+  }
+
   dimension_group: spend_timestamp {
     type: time
     timeframes: [
@@ -151,6 +157,37 @@ view: gdb_purchase {
     type: string
     sql: ${TABLE}.user_id ;;
   }
+
+measure: total_customers {
+  description: "paying player"
+  type: count_distinct
+  sql: ${user_id} ;;
+  filters: {
+    field: gross_revenue
+    value: ">0"
+  }
+}
+#
+#   measure: total_customers {
+#     description: "Total players who spent within the determined period"
+#     type: count_distinct
+#     sql: ${user_id} ;;
+#     filters: {
+#       field: gross_revenue
+#       value: ">0"
+#     }
+#   }
+
+  measure: spender_ratio {
+    type: number
+    sql: 1.0*${total_customers}/NULLIF(${dim_gdb_users.count},0) ;;
+    value_format_name: percent_2
+  }
+#   measure: spender_ratio {
+#     type: number
+#     sql: 1.0*${total_customers}/NULLIF(${dim_gdb_users.total_users},0) ;;
+#     value_format_name: percent_2
+#   }
 
   measure: count {
     type: count

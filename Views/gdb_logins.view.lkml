@@ -1,4 +1,5 @@
 view: gdb_logins {
+  label: "Logins and Users"
   sql_table_name: dw_reports.gdb_logins ;;
 
   dimension: avg_duration {
@@ -138,14 +139,47 @@ view: gdb_logins {
     sql: ${TABLE}.user_id ;;
   }
 
+
   dimension: days_since_first_login {
     type: number
     sql: date_diff( ${login_date}, ${dim_gdb_users.install_date}, day) ;;
+    drill_fields: [days_since_first_login, user_id,first_country, first_platform]
+  }
+
+
+# Drill Selector
+  parameter: drill_by {
+    type: string
+    default_value: "platform"
+    allowed_value: { label: "Country" value: "country" }
+    allowed_value: { label: "Platform" value: "platform" }
+    allowed_value: { label: "Game" value: "game" }
+    allowed_value: { label: "Client Version" value: "first_client_version" }
+  }
+
+  dimension: drill_field {
+    hidden: yes
+    type: string
+    label_from_parameter: drill_by
+    sql:
+      {% case  drill_by._parameter_value %}
+        {% when "'country'" %}
+          ${looker_countries.country}
+        {% when "'device_platform'" %}
+          ${platform}
+        {% when "'game_name'" %}
+          ${game}
+        {% when "'game_version'" %}
+          ${first_client_version}
+        {% else %}
+         null
+      {% endcase %} ;;
   }
 
   measure: user_count {
     type: count_distinct
     sql: ${user_id} ;;
+    drill_fields: [game, user_id, media_source_type]
   }
 
   measure: total_sessions {
@@ -159,8 +193,14 @@ view: gdb_logins {
     value_format_name: decimal_2
   }
 
+  measure: total_active_users {
+    type: count_distinct
+    sql: ${user_id} ;;
+    value_format_name: decimal_0
+  }
+
   measure: count {
     type: count
-    drill_fields: [media_source_name]
+    drill_fields: [media_source_name, user_id]
   }
 }

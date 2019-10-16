@@ -211,6 +211,18 @@ view: gdb_revenue {
     sql: ${TABLE}.wm_spenders ;;
   }
 
+  measure: total_gross_revenue {
+    type: sum
+    sql: ${gross_revenue} ;;
+    value_format_name: usd_0
+  }
+
+  measure: total_net_revenue {
+    type: sum
+    sql: ${net_revenue} ;;
+    value_format_name: usd_0
+  }
+
   measure: count {
     type: count
     drill_fields: [media_source_name, country_name]

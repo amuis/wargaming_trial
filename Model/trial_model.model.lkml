@@ -23,9 +23,26 @@ explore: gdb_logins {
   }
 
   join: dim_gdb_users {
+    type:  left_outer
     relationship: many_to_one
     sql_on: ${gdb_logins.user_id} =  ${dim_gdb_users.user_id};;
   }
+}
+
+explore: dim_gdb_users {
+  label: "User Purchases"
+
+  join: gdb_purchase {
+    type: left_outer
+    sql_on: ${gdb_purchase.user_id} = ${dim_gdb_users.user_id} ;;
+    relationship: many_to_one
+  }
+}
+
+
+
+explore: gdb_revenue {
+  label: "Revenue"
 }
 #
 # explore: af_3rd_party_games_kpis {}

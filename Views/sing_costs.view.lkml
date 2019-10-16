@@ -66,6 +66,12 @@ view: sing_costs {
     sql: ${TABLE}.ua_costs ;;
   }
 
+  measure: total_ua_costs {
+    type: sum
+    sql: ua_costs ;;
+    value_format_name: decimal_2
+  }
+
   measure: count {
     type: count
     drill_fields: [media_source_name, country_name]

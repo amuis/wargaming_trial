@@ -1,6 +1,6 @@
 view: looker_countries{
   sql_table_name: ${country_lookup.SQL_TABLE_NAME} ;;
-  label: "Country Mapping"
+
 
   dimension: country_code {
     hidden: yes
@@ -9,6 +9,7 @@ view: looker_countries{
   }
 
   dimension: country {
+    view_label: "Logins and Users"
     type: string
     sql: ${TABLE}.countryname;;
   }

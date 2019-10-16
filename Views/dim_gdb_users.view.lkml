@@ -1,4 +1,5 @@
 view: dim_gdb_users {
+  label: "User Data"
   sql_table_name: dw_reports.dim_gdb_users ;;
 
   dimension: andr_gross_revenue {
@@ -527,6 +528,18 @@ view: dim_gdb_users {
   dimension: wm_trn {
     type: number
     sql: ${TABLE}.wm_trn ;;
+  }
+
+
+  measure: total_users {
+    type: count_distinct
+    sql: ${user_id} ;;
+    value_format_name: decimal_0
+  }
+
+  measure: lifetime_spend {
+    type: sum
+    sql: gdb_purchase ;;
   }
 
   measure: count {
