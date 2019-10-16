@@ -49,6 +49,11 @@ view: gdb_logins {
   dimension: game {
     type: string
     sql: ${TABLE}.game ;;
+    link: {
+      label: "{{value}} Monetization Dashboard"
+      url: "/dashboards/12?Game={{ value | encode_uri }}"
+      icon_url: "http://www.looker.com/favicon.ico"
+    }
   }
 
   dimension_group: install {
